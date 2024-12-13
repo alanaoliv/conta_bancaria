@@ -5,8 +5,8 @@ export class ContaPoupança extends Conta{
     private _aniversario: number;
 
     constructor(
-        agencia: number,
         numero: number,
+        agencia: number,
         tipo: number,
         titular: string,
         saldo: number,

@@ -5,8 +5,8 @@ export class ContaCorrente extends Conta{
     private _limite: number;
 
     constructor(
-        agencia: number,
         numero: number,
+        agencia: number,
         tipo: number,
         titular: string,
         saldo: number,
