@@ -91,8 +91,8 @@ export class Conta{
         console.log("_________________________________");
         console.log("           Dados da Conta        ");
         console.log("_________________________________");
-        console.log(`Número da Conta: ${this._numero}`)
         console.log(`Número da Agência: ${this._agencia}`)
+        console.log(`Número da Conta: ${this._numero}`)
         console.log(`Tipo da Conta: ${tipo}`)
         console.log(`Nome do Titular da Conta: ${this._titular}`)
         console.log(`Saldo da Conta: ${this._saldo}`)
