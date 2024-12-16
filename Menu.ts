@@ -6,7 +6,7 @@ import { ContaController } from './src/controller/ContaController';
 
 export function main() {
 
-    let opcao, numero, agencia, tipo, saldo, limite, aniversario: number;
+    let opcao, numero, agencia, tipo, saldo, limite, aniversario, numeroDestino, valor: number;
     let titular: string;
     const tipoContas = ['Conta Corrente', 'Conta Poupanca'];
 
@@ -81,42 +81,42 @@ export function main() {
             case 4:
                 console.log("\nAtualizar Dados da Conta\n");
 
-                console.log("Digite o Número da Conta: ");
-                    numero = readlinesync.questionInt("");
+                    console.log("Digite o Número da Conta: ");
+                        numero = readlinesync.questionInt("");
                 
-                let conta = contas.buscarNoArray(numero);
+                    let conta = contas.buscarNoArray(numero);
 
-                if (conta !== null){
+                    if (conta !== null){
 
-                    console.log("Digite o Novo Número da Agência: ");
-                    agencia = readlinesync.questionInt(" ");
+                        console.log("Digite o Novo Número da Agência: ");
+                        agencia = readlinesync.questionInt(" ");
 
-                    console.log("Digite o Novo Nome do Titular: ");
-                    titular = readlinesync.question(" ");
-            
-                    console.log("Digite o Novo Saldo da Conta: ");
-                    saldo = readlinesync.questionFloat(" ");
+                        console.log("Digite o Novo Nome do Titular: ");
+                        titular = readlinesync.question(" ");
+                
+                        console.log("Digite o Novo Saldo da Conta: ");
+                        saldo = readlinesync.questionFloat(" ");
 
-                    tipo = conta.tipo;
+                        tipo = conta.tipo;
 
-                    switch(tipo){
-                        case 1:
-                            console.log("Digite o Novo Limite da Conta: ");
-                            limite = readlinesync.questionFloat(" ");
-                            contas.atualizar(new ContaCorrente(numero, agencia, tipo, titular, saldo, limite)) 
-                        break;
-                        case 2:
-                            console.log("Digite o Novo Dia do Aniversário da Poupança: ");
-                            aniversario = readlinesync.questionInt(" "); 
-                            contas.atualizar(new ContaPoupança(numero, agencia, tipo, titular, saldo, aniversario)) 
-                        break;
-                    }
+                        switch(tipo){
+                            case 1:
+                                console.log("Digite o Novo Limite da Conta: ");
+                                limite = readlinesync.questionFloat(" ");
+                                contas.atualizar(new ContaCorrente(numero, agencia, tipo, titular, saldo, limite)) 
+                            break;
+                            case 2:
+                                console.log("Digite o Novo Dia do Aniversário da Poupança: ");
+                                aniversario = readlinesync.questionInt(" "); 
+                                contas.atualizar(new ContaPoupança(numero, agencia, tipo, titular, saldo, aniversario)) 
+                            break;
+                        }
 
-                    }else{
-                        console.log("Conta não encontrada!");
-                    }
+                        }else{
+                            console.log("Conta não encontrada!");
+                        }
                 keyPress();
-                break;
+            break;
             case 5:
                 console.log("\nApagar uma Conta\n");
 
@@ -126,19 +126,55 @@ export function main() {
                     contas.deletar(numero);
 
                 keyPress();
-                break;
+            break;
             case 6:
                 console.log("\nSaque\n");
 
-                keyPress();
-                break;
-            case 7:
-                console.log("\nDepósito\n");
+                    console.log("Digite o Número da Conta: ");
+                    numero = readlinesync.questionInt("");
+
+                    console.log("Digite o Valor do Saque: ");
+                    valor = readlinesync.questionFloat("");
+
+                    contas.sacar(numero, valor);
 
                 keyPress();
-                break;
+            break;
+            case 7:
+                console.log("\nDepósito\n");
+                
+                    console.log("Digite o Número da Conta: ");
+                    numero = readlinesync.questionInt("");
+
+                    console.log("Digite o Valor do Depósito: ");
+                    valor = readlinesync.questionFloat("");
+
+                    contas.depositar(numero, valor);
+
+                keyPress();
+            break;
             case 8:
                 console.log("\nTransferência entre Contas\n");
+
+                    console.log("Digite o Número da Conta de Origem: ");
+                    numero = readlinesync.questionInt("");
+                   
+                    console.log("Digite o Número da Conta de Destino: ");
+                    numeroDestino = readlinesync.questionInt("");
+
+                    console.log("Digite o Valor da Transferência: ");
+                    valor = readlinesync.questionFloat("");
+
+                    contas.transferir(numero, numeroDestino, valor);
+
+                keyPress();
+            break;
+            case 9:
+                console.log("\nConsulta pelo Titular")
+                
+                    console.log("\nDigite o nome do titular: ")
+                    titular = readlinesync.question(" ")
+                    contas.procurarPorTitular(titular);
 
                 keyPress();
                 break;
@@ -165,6 +201,7 @@ function menu(): void{
     console.log("           6 - Sacar                                     ")
     console.log("           7 - Depositar                                 ")
     console.log("           8 - Transferir valores entre Contas           ")
+    console.log("           9 - Buscar Conta por Titular                                      ")
     console.log("           0 - Sair                                      ")
     console.log("_________________________________________________________")
     console.log("Entre com a opção desejada: ", colors.reset)
