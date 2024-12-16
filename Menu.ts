@@ -81,10 +81,49 @@ export function main() {
             case 4:
                 console.log("\nAtualizar Dados da Conta\n");
 
+                console.log("Digite o Número da Conta: ");
+                    numero = readlinesync.questionInt("");
+                
+                let conta = contas.buscarNoArray(numero);
+
+                if (conta !== null){
+
+                    console.log("Digite o Novo Número da Agência: ");
+                    agencia = readlinesync.questionInt(" ");
+
+                    console.log("Digite o Novo Nome do Titular: ");
+                    titular = readlinesync.question(" ");
+            
+                    console.log("Digite o Novo Saldo da Conta: ");
+                    saldo = readlinesync.questionFloat(" ");
+
+                    tipo = conta.tipo;
+
+                    switch(tipo){
+                        case 1:
+                            console.log("Digite o Novo Limite da Conta: ");
+                            limite = readlinesync.questionFloat(" ");
+                            contas.atualizar(new ContaCorrente(numero, agencia, tipo, titular, saldo, limite)) 
+                        break;
+                        case 2:
+                            console.log("Digite o Novo Dia do Aniversário da Poupança: ");
+                            aniversario = readlinesync.questionInt(" "); 
+                            contas.atualizar(new ContaPoupança(numero, agencia, tipo, titular, saldo, aniversario)) 
+                        break;
+                    }
+
+                    }else{
+                        console.log("Conta não encontrada!");
+                    }
                 keyPress();
                 break;
             case 5:
-                console.log("\nApagar Conta\n");
+                console.log("\nApagar uma Conta\n");
+
+                    console.log("Digite o Número da Conta: ");
+                    numero = readlinesync.questionInt("");
+
+                    contas.deletar(numero);
 
                 keyPress();
                 break;
